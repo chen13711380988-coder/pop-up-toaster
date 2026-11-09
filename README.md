@@ -1,4 +1,4 @@
-# Pop-up Toaster — Activity 4
+# Pop-up Toaster
 
 **Student:** Qilin Chen  
 **Appliance:** A cream-colored pop-up toaster with a browning knob and a Cancel button.
@@ -108,13 +108,6 @@ node --test model.test.js
 
 The tests cover normal completion, early cancellation, invalid actions, all five durations, level retention, and state snapshots. Browser interaction checks should also be recorded separately from the student's own testing and reflection.
 
-## My reflection
-
-<!-- Write your own reflection here after trying the model. -->
-
-## Submission links
-
-- GitHub repository: https://github.com/chen13711380988-coder/pop-up-toaster
 
 
 ## Interface revision
