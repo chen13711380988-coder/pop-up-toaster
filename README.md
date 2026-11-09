@@ -115,7 +115,6 @@ The tests cover normal completion, early cancellation, invalid actions, all five
 ## Submission links
 
 - GitHub repository: https://github.com/chen13711380988-coder/pop-up-toaster
-- Selected Codex conversation excerpts (independent document, not a native Codex share link): https://docs.google.com/document/d/1sFPW0Qp_5F_F3bSNqeSRSx_uj8f46ifypz5zX8M8I_U/edit
 
 
 ## Interface revision
