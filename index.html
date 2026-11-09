@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A small, interactive pop-up toaster. Explore how time, browning, and five states work together.">
+  <title>The Toast Lab — a pop-up toaster</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- defer waits for the HTML to exist; the model loads before the interface. -->
+  <script src="model.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="page">
+    <header class="masthead">
+      <a class="wordmark" href="#main">THE TOAST LAB<span class="brand-dot" aria-hidden="true">✳</span></a>
+      <span class="edition">a toaster model</span>
+    </header>
+    <main id="main">
+      <div class="intro">
+        <div><h1>A Pop-up Toaster</h1></div>
+        <p class="intro-note">Insert a slice. Find your shade. Press the lever and take out your toast.</p>
+      </div>
+
+      <section class="experiment" aria-label="Interactive toaster">
+        <div class="appliance-area">
+          <div class="state-label"><span class="status-dot" aria-hidden="true"></span><span id="state-name">Idle</span><span id="heat-label">heating off</span></div>
+          <!-- Rear image → moving bread → clipped front rim. The bread emerges inside the slot. -->
+          <div class="appliance" id="appliance" data-state="Idle">
+            <div class="toast-in-slot toast-stack" id="slot-toast" aria-hidden="true">
+              <img class="toast-light" src="assets/toast-light.png" alt="">
+              <img class="toast-medium" src="assets/toast-medium.png" alt="">
+              <img class="toast-dark" src="assets/toast-dark.png" alt="">
+            </div>
+            <img class="toaster-body" src="assets/toaster-body.png" alt="A cream enamel pop-up toaster with chrome trim and caramel-brown controls.">
+            <img class="toaster-body toaster-front" src="assets/toaster-body.png" alt="" aria-hidden="true">
+            <div class="heat-glow" aria-hidden="true"></div>
+            <div class="lever-track" aria-hidden="true"></div>
+            <button class="lever" id="lever-button" aria-label="Press lever to start toasting" title="Press the lever"><span></span></button>
+            <span class="lever-note" aria-hidden="true">press down <span>↙</span></span>
+            <div class="dial" aria-hidden="true"><div class="dial-numbers"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div><div class="dial-needle" id="dial-needle"></div><span class="dial-center"></span></div>
+            <button class="cancel-switch" id="cancel-button" aria-label="Cancel toasting" title="Cancel"><span></span></button>
+            <span class="cancel-label" aria-hidden="true">CANCEL</span>
+            <button class="shade-knob" id="browning-knob" aria-label="Browning level 3. Click to select level 4." aria-describedby="level-note" title="Click to change browning level"><span class="knob-grip" aria-hidden="true"><span></span></span></button>
+            <div class="counter-shadow" aria-hidden="true"></div>
+          </div>
+          <ol class="state-path" aria-label="Model states">
+            <li data-state="Idle" aria-current="step">Idle</li><li data-state="Ready">Ready</li><li data-state="Toasting">Toasting</li><li data-state="Done">Done</li><li data-state="Cancelled">Cancelled</li>
+          </ol>
+        </div>
+
+        <div class="controls">
+          <section class="control-section" aria-labelledby="load-heading">
+            <h2 id="load-heading"><span>01</span> Bread</h2>
+            <div class="bread-buttons"><button id="insert-button" class="button button-primary">Insert bread <span aria-hidden="true">＋</span></button><button id="remove-button" class="button button-secondary" disabled>Remove bread</button></div>
+          </section>
+          <section class="control-section" aria-labelledby="shade-heading">
+            <h2 id="shade-heading"><span>02</span> Browning</h2>
+            <div class="shade-heading"><span>Selected level</span><output id="level-output" for="browning-knob">3 / Medium</output></div>
+            <p class="small-note" id="level-note">Click the brown knob to change level: 1 → 5 → 1.</p>
+          </section>
+          <section class="control-section watch-section" aria-labelledby="watch-heading">
+            <h2 id="watch-heading"><span>03</span> Timer</h2>
+            <div class="timer-row">
+              <div><p class="timer-label">TIME REMAINING</p><div class="timer"><span id="time-remaining" role="timer" aria-label="0 seconds remaining">00</span><span>sec</span></div></div>
+              <div class="slice-preview"><div class="toast-stack" id="preview-toast" aria-hidden="true"><img class="toast-light" src="assets/toast-light.png" alt=""><img class="toast-medium" src="assets/toast-medium.png" alt=""><img class="toast-dark" src="assets/toast-dark.png" alt=""></div></div>
+            </div>
+            <progress id="cycle-progress" max="100" value="0" aria-label="Toasting cycle progress">0%</progress>
+          </section>
+          <div class="message-card"><span class="message-arrow" aria-hidden="true">↳</span><p id="feedback" role="status" aria-live="polite">Insert bread to begin.</p></div>
+        </div>
+      </section>
+
+      <section class="shade-guide" aria-label="Five browning levels and their model times">
+        <ol class="shade-samples">
+          <li data-level="1"><div class="sample-toast toast-stack" style="--medium:0;--dark:0"><img src="assets/toast-light.png" class="toast-light" alt="Very lightly toasted bread"><img src="assets/toast-medium.png" class="toast-medium" alt=""><img src="assets/toast-dark.png" class="toast-dark" alt=""></div><span class="sample-number">01</span><span>6 seconds</span></li>
+          <li data-level="2"><div class="sample-toast toast-stack" style="--medium:0.5;--dark:0"><img src="assets/toast-light.png" class="toast-light" alt="Light golden toast"><img src="assets/toast-medium.png" class="toast-medium" alt=""><img src="assets/toast-dark.png" class="toast-dark" alt=""></div><span class="sample-number">02</span><span>9 seconds</span></li>
+          <li data-level="3" class="selected"><div class="sample-toast toast-stack" style="--medium:1;--dark:0"><img src="assets/toast-light.png" class="toast-light" alt="Medium golden toast"><img src="assets/toast-medium.png" class="toast-medium" alt=""><img src="assets/toast-dark.png" class="toast-dark" alt=""></div><span class="sample-number">03</span><span>12 seconds</span></li>
+          <li data-level="4"><div class="sample-toast toast-stack" style="--medium:1;--dark:0.5"><img src="assets/toast-light.png" class="toast-light" alt="Medium-dark toast"><img src="assets/toast-medium.png" class="toast-medium" alt=""><img src="assets/toast-dark.png" class="toast-dark" alt=""></div><span class="sample-number">04</span><span>15 seconds</span></li>
+          <li data-level="5"><div class="sample-toast toast-stack" style="--medium:1;--dark:1"><img src="assets/toast-light.png" class="toast-light" alt="Dark golden-brown toast"><img src="assets/toast-medium.png" class="toast-medium" alt=""><img src="assets/toast-dark.png" class="toast-dark" alt=""></div><span class="sample-number">05</span><span>18 seconds</span></li>
+        </ol>
+      </section>
+    </main>
+
+  </div>
+</body>
+</html>
