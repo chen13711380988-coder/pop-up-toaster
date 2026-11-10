@@ -7,6 +7,8 @@ This small HTML/CSS/JavaScript model explores a simple relationship: the chosen 
 
 ## Open the project
 
+[Open the interactive model and view its HTML, CSS, and JavaScript on CodePen](https://codepen.io/chen13711380988-coder/pen/jEBdQLX).
+
 Open `index.html` in a modern browser. Keep the other files and the `assets` folder beside it. No installation, framework, account, or build step is required.
 
 To serve it locally instead, open a terminal in this folder and run:
